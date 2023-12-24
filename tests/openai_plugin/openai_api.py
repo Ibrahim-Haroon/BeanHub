@@ -1,8 +1,13 @@
-
-def main() -> int:
-
-    return 0
+import pytest
+from mock import MagicMock
 
 
-if __name__ == "__main__":
-    main()
+def foo():
+    # Arrange
+
+    # Act
+    x, y = 1, 1
+
+    # Assert
+    assert(x == y)
+
