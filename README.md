@@ -3,4 +3,4 @@
 # BeanHub
 
 ## Structure
-![codebase_structure.png](images/codebase_structure.png)
+![codebase_structure.png](other/codebase_structure.png)
