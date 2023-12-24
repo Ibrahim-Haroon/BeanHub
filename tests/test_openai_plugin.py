@@ -25,5 +25,5 @@ def test_openai_api(mock_openai):
             {"role": "system", "content": "System message"},
             {"role": "user", "content": "Test prompt"}
         ],
-        model="gpt-3.5-turbo-1106"
+        model="gpt-4-1106-preview"
     )
