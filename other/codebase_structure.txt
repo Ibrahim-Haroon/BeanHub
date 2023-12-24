@@ -1,0 +1,27 @@
+BeanHub
+├── .github
+│   └── workflows
+│       └── unit-test.yml
+│
+├── other
+│   ├── api_key.txt (untracked)
+│   └── images
+│       ├── architecture.drawio.png
+│       ├── codebase_structure.png
+│       ├── bean_logo.png
+│       └── mock_menu.png
+│
+├── scripts
+│   ├── I0
+│   │   ├── input.txt
+│   │   └── output.txt
+│   ├── openai_plugin.py
+│   └── __init__.py
+│
+├── tests
+│   ├── test_openai_plugin.py
+│   └── __init__.py
+│
+├── .gitignore
+├── README.md
+└── requirements.txt
