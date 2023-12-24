@@ -21,7 +21,7 @@ def openai_api(prompt: str, model_behavior: str = None, api_key: str = None) -> 
                     "content": prompt,
                 }
             ],
-            model="gpt-3.5-turbo-1106",
+            model="gpt-4-1106-preview",
         )
     else:
         response = client.chat.completions.create(
@@ -31,7 +31,7 @@ def openai_api(prompt: str, model_behavior: str = None, api_key: str = None) -> 
                     "content": prompt,
                 }
             ],
-            model="gpt-3.5-turbo-1106",
+            model="gpt-4-1106-preview",
         )
 
     return response.choices[0].message.content
