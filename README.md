@@ -1,3 +1,5 @@
+![Build](https://github.com/Ibrahim-Haroon/BeanHub/actions/workflows/unit-test.yml/badge.svg)
+
 # BeanHub
 
 ## Structure
