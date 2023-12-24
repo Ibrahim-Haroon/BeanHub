@@ -10,7 +10,7 @@ def openai_api(prompt: str, model_behavior: str = None, api_key: str = None) -> 
         client = OpenAI()
 
     if model_behavior:
-        chat_completion = client.chat.completions.create(
+        response = client.chat.completions.create(
             messages=[
                 {
                     "role": "system",
@@ -24,7 +24,7 @@ def openai_api(prompt: str, model_behavior: str = None, api_key: str = None) -> 
             model="gpt-3.5-turbo-1106",
         )
     else:
-        chat_completion = client.chat.completions.create(
+        response = client.chat.completions.create(
             messages=[
                 {
                     "role": "user",
@@ -34,7 +34,7 @@ def openai_api(prompt: str, model_behavior: str = None, api_key: str = None) -> 
             model="gpt-3.5-turbo-1106",
         )
 
-    return chat_completion.choices[0].message.content
+    return response.choices[0].message.content
 
 
 def main(prompts: list[str]) -> int:
