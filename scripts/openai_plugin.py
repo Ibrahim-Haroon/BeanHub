@@ -1,14 +1,60 @@
-def addition(a, b):
-    return a + b
+from openai import OpenAI
+import sys
+from tqdm import tqdm
 
 
-def subtraction(a, b):
-    return a - b
+def openai_api(prompt: str, model_behavior: str = None, api_key: str = None) -> str:
+    if api_key:
+        client = OpenAI(api_key=api_key)
+    else:
+        client = OpenAI()
+
+    if model_behavior:
+        chat_completion = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "system",
+                    "content": model_behavior
+                },
+                {
+                    "role": "user",
+                    "content": prompt,
+                }
+            ],
+            model="gpt-3.5-turbo-1106",
+        )
+    else:
+        chat_completion = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt,
+                }
+            ],
+            model="gpt-3.5-turbo-1106",
+        )
+
+    return chat_completion.choices[0].message.content
 
 
-def multiplication(a, b):
-    return a * b
+def main(prompts: list[str]) -> int:
+    for prompt in tqdm(prompts):
+        prompt = prompt.strip()
+
+        response = openai_api(prompt)
+
+        print(prompt + " " + response)
+
+    return 0
 
 
-def division(a, b):
-    return a / b
+if __name__ == "__main__":
+    sys.stdin = open("IO/input.txt", 'r')
+    sys.stdout = open("IO/output.txt", 'w')
+
+    istream = []
+
+    for line in sys.stdin:
+        istream.append(line)
+
+    main(istream)
