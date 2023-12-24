@@ -9,17 +9,18 @@ def mock_openai(mocker):
 
 
 def test_openai_api(mock_openai):
+    expected_response = "This is a test"
     # Create a MagicMock for the API response
-    mock_completion = MagicMock()
-    mock_completion.choices[0].message.content = "mocked_response"
-    mock_openai.return_value.chat.completions.create.return_value = mock_completion
+    mock_response = MagicMock()
+    mock_response.choices[0].message.content = expected_response
+    mock_openai.return_value.chat.completions.create.return_value = mock_response
 
-    # Call the function with some input
+    # Call the api with mock input
     with patch('scripts.openai_plugin.OpenAI', return_value=mock_openai.return_value):
-        result = openai_api(prompt="Test prompt", model_behavior="System message", api_key="foo_key")
+        response = openai_api(prompt="Test prompt", model_behavior="System message", api_key="foo_key")
 
     # Assert that the function returns the expected result
-    assert result == "mocked_response"
+    assert response == expected_response
 
     # Assert that the API call was made with the correct parameters
     mock_openai.return_value.chat.completions.create.assert_called_once_with(

@@ -3,7 +3,7 @@
 # BeanHub
 
 ## Architecture
-![architecture.drawio.png](other/architecture.drawio.png)
+![architecture.drawio.png](other/images/architecture.drawio.png)
 
 ## Structure
-![codebase_structure.png](other/codebase_structure.png)
+![codebase_structure.png](other/images/codebase_structure.png)
