@@ -1,8 +1,11 @@
-import sys
 import os
+import sys
 import pytest
-from mock import MagicMock, patch
-from BeanHub.scripts.openai_plugin import OpenAI
+
+# Add the path to the root of your project
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from openai_plugin.openai_api import OpenAPI
 
 
 @pytest.fixture
