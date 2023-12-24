@@ -1,6 +1,6 @@
 from scripts.openai_plugin import openai_api
 import pytest
-from unittest.mock import MagicMock, patch
+from mock import MagicMock, patch
 
 
 @pytest.fixture
