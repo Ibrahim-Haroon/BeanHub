@@ -22,7 +22,3 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Test with pytest
       run: python -m coverage run --branch --source=scripts -m pytest ./tests/
-    # - name: Coverage report
-    #   run: coverage report --skip-empty
-    # - name: Upload coverage reports to Codecov
-    #   uses: codecov/codecov-action@v3
