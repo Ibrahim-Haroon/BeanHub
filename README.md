@@ -7,4 +7,4 @@
 ![architecture.drawio.png](other/images/architecture.drawio.png)
 
 ## Timeline
-![timeline.png](other/images/timeline.png)
+![timeline.png](other/images/timeline.drawio.png)
