@@ -3,7 +3,7 @@ import sys
 from tqdm import tqdm
 
 
-def openai_api(prompt: str, model_behavior: str = None, api_key: str = None) -> str:
+def openai_api(prompt: str, api_key: str = None, model_behavior: str = None) -> str:
     if api_key:
         client = OpenAI(api_key=api_key)
     else:
@@ -38,12 +38,15 @@ def openai_api(prompt: str, model_behavior: str = None, api_key: str = None) -> 
 
 
 def main(prompts: list[str]) -> int:
+    with open("/Users/ibrahimharoon/Python/BeanHub/other/api_key") as api_key:
+        key = api_key.readline().strip()
+
     for prompt in tqdm(prompts):
         prompt = prompt.strip()
 
-        response = openai_api(prompt)
+        response = openai_api(prompt, key)
 
-        print(prompt + " " + response)
+        print("question: " + prompt + " response: " + response)
 
     return 0
 
