@@ -49,8 +49,8 @@ def main(prompts: list[str]) -> int:
 
 
 if __name__ == "__main__":
-    sys.stdin = open("IO/input.txt", 'r')
-    sys.stdout = open("IO/output.txt", 'w')
+    sys.stdin = open("../IO/input.txt", 'r')
+    sys.stdout = open("../IO/output.txt", 'w')
 
     istream = []
 
