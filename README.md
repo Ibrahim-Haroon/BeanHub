@@ -9,5 +9,7 @@
 ## Architecture
 ![architecture.drawio.png](other/images/architecture.drawio.png)
 
+![Learn more here](https://github.com/Ibrahim-Haroon/BeanHub/wiki)
+
 ## Timeline
 ![timeline.png](other/images/timeline.drawio.png)
