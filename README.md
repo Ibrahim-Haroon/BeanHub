@@ -6,8 +6,5 @@
 ## Architecture
 ![architecture.drawio.png](other/images/architecture.drawio.png)
 
-## Structure
-![codebase_structure.png](other/images/codebase_structure.png)
-
 ## Timeline
 ![timeline.png](other/images/timeline.png)

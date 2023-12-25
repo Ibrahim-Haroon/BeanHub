@@ -1,11 +1,14 @@
-from scripts.openai_plugin import openai_api
+from scripts.openai_integration.openai_text_caller import openai_api
 import pytest
 from mock import MagicMock, patch
+from typing import Final
+
+script_path: Final[str] = 'scripts.openai_integration.openai_text_caller'
 
 
 @pytest.fixture
 def mock_openai(mocker):
-    return mocker.patch('scripts.openai_plugin.OpenAI')
+    return mocker.patch(script_path + '.OpenAI')
 
 
 def test_openai_api(mock_openai):
@@ -15,7 +18,7 @@ def test_openai_api(mock_openai):
     mock_openai.return_value.chat.completions.create.return_value = mock_completion
 
     # Act
-    with patch('scripts.openai_plugin.OpenAI', return_value=mock_openai.return_value):
+    with patch(script_path + '.OpenAI', return_value=mock_openai.return_value):
         result = openai_api(prompt="Test prompt", model_behavior="System message", api_key="foo_key")
 
     # Assert
