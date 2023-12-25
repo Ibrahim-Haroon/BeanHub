@@ -2,3 +2,4 @@
 .pytest_cache
 other/api_key
 scripts/IO/*
+scripts/recorded_audio.mp3
