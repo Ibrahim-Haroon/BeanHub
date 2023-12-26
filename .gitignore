@@ -2,8 +2,6 @@
 .pytest_cache
 other/api_key
 other/connection_string
-scripts/IO/input.txt
-scripts/IO/output.txt
 scripts/recorded_audio.mp3
 scripts/__pycache__/
 scripts/ai_integration/__pycache__/
