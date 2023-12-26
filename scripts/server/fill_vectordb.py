@@ -3,6 +3,11 @@ from scripts.ai_integration.openai_embeddings_api import *
 
 
 def connection_string() -> str:
+    """
+
+    @rtype: str
+    @return: connection string for PGVector
+    """
     connection_string_file_path = path.join(path.dirname(path.realpath(__file__)), "../..", "other",
                                             "connection_string")
     with open(connection_string_file_path) as connection_str:
@@ -11,7 +16,12 @@ def connection_string() -> str:
     return connection
 
 
-def fill_database(key: str = None):
+def fill_database(key: str = None) -> None:
+    """
+
+    @rtype: None
+    @param key: api key for OpenAI auth
+    """
     menu = parse_menu_csv()
     vectors, embeddings = embedding_api(menu, key)
 
@@ -20,8 +30,8 @@ def fill_database(key: str = None):
 
 
 def main() -> int:
-    key_file_path = path.join(path.dirname(path.realpath(__file__)), "../..", "other", "api_key")
-    with open(key_file_path) as api_key:
+    key_path = path.join(path.dirname(path.realpath(__file__)), "../..", "other", "api_key")
+    with open(key_path) as api_key:
         key = api_key.readline().strip()
 
     fill_database(key)

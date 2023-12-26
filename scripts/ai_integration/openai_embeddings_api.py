@@ -3,7 +3,16 @@ from os import path
 import pandas as pd
 
 
-def openai_embedding_api(texts: [str], api_key: str = None):
+
+def embedding_api(texts: [str], api_key: str = None) -> object:
+    """
+
+    @rtype: list[list[float]], embeddings object
+    @param texts: list[str] = menu items which contain item name and price
+    @param api_key: auth method for OpenAI
+    @return: vectors of each menu item to insert into vector_db and embeddings for PGVector
+    """
+    
     vectors = []
     embeddings = OpenAIEmbeddings(api_key=api_key)
 
@@ -13,7 +22,12 @@ def openai_embedding_api(texts: [str], api_key: str = None):
     return vectors, embeddings
 
 
-def parse_menu_csv():
+def parse_menu_csv() -> list[str]:
+    """
+
+    @rtype: list[str]
+    @return: menu items packaged in a list
+    """
     menu_items = []
 
     menu_file_path = path.join(path.dirname(path.realpath(__file__)), "../IO", "menu.csv")
@@ -36,19 +50,21 @@ def parse_menu_csv():
     return menu_items
 
 
-def main() -> int:
-    key_file_path = path.join(path.dirname(path.realpath(__file__)), "../..", "other", "api_key")
-    with open(key_file_path) as api_key:
+def main(key_path: str) -> int:
+    """
+
+    @param key_path: api key for OpenAI
+    @return: 0 for success
+    """
+    with open(key_path) as api_key:
         key = api_key.readline().strip()
 
-
     menu = parse_menu_csv()
-    print(menu[0])
-    vectors, _ = openai_embedding_api(menu, key)
-    print(len(vectors))
+    vectors, _ = embedding_api(menu, key)
 
     return 0
 
 
 if __name__ == "__main__":
-    main()
+    key_file_path = path.join(path.dirname(path.realpath(__file__)), "../..", "other", "api_key")
+    main(key_file_path)
