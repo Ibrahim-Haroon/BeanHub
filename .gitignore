@@ -3,6 +3,8 @@
 other/api_key
 other/connection_string
 scripts/recorded_audio.mp3
+scripts/IO/input.txt
+scripts/IO/output.txt
 scripts/__pycache__/
 scripts/ai_integration/__pycache__/
 tests/__pycache__/
