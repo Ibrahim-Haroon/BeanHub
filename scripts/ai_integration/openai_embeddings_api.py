@@ -3,7 +3,7 @@ from os import path
 import pandas as pd
 
 
-def embedding_api(texts: [str], api_key: str = None):
+def openai_embedding_api(texts: [str], api_key: str = None):
     vectors = []
     embeddings = OpenAIEmbeddings(api_key=api_key)
 
@@ -44,7 +44,7 @@ def main() -> int:
 
     menu = parse_menu_csv()
     print(menu[0])
-    vectors, _ = embedding_api(menu, key)
+    vectors, _ = openai_embedding_api(menu, key)
     print(len(vectors))
 
     return 0
