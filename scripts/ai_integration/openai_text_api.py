@@ -1,6 +1,7 @@
 from openai import OpenAI
 import sys
 from tqdm import tqdm
+from os import path
 
 
 def openai_api(prompt: str, api_key: str = None, model_behavior: str = None) -> str:
@@ -38,7 +39,8 @@ def openai_api(prompt: str, api_key: str = None, model_behavior: str = None) -> 
 
 
 def main(prompts: list[str]) -> int:
-    with open("/Users/ibrahimharoon/Python/BeanHub/other/api_key") as api_key:
+    key_file_path = path.join(path.dirname(path.realpath(__file__)), "api_key")
+    with open(key_file_path) as api_key:
         key = api_key.readline().strip()
 
     for prompt in tqdm(prompts):
