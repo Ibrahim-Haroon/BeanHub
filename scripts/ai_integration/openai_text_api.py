@@ -5,6 +5,13 @@ from os import path
 
 
 def openai_api(prompt: str, api_key: str = None, model_behavior: str = None) -> str:
+    """
+
+    :param prompt: str = question
+    :param api_key: str = key to validate OpenAI api call
+    :param model_behavior: str = needed if want model to imitate something specific (i.e. doctor)
+    :return: response to question
+    """
     if api_key:
         client = OpenAI(api_key=api_key)
     else:
@@ -39,6 +46,12 @@ def openai_api(prompt: str, api_key: str = None, model_behavior: str = None) -> 
 
 
 def main(prompts: list[str]) -> int:
+    """
+
+    @param prompts: str = list of questions for gpt
+    @return: 0 if successful
+    :rtype: int
+    """
     key_file_path = path.join(path.dirname(path.realpath(__file__)), "api_key")
     with open(key_file_path) as api_key:
         key = api_key.readline().strip()
@@ -54,8 +67,11 @@ def main(prompts: list[str]) -> int:
 
 
 if __name__ == "__main__":
-    sys.stdin = open("../IO/input.txt", 'r')
-    sys.stdout = open("../IO/output.txt", 'w')
+    input_file_path = path.join(path.dirname(path.realpath(__file__)), "../IO", "input")
+    output_file_path = path.join(path.dirname(path.realpath(__file__)), "../IO", "output")
+
+    sys.stdin = open(input_file_path, 'r')
+    sys.stdout = open(output_file_path, 'w')
 
     istream = []
 
