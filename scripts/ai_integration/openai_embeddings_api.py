@@ -1,11 +1,39 @@
 from langchain.embeddings import OpenAIEmbeddings
 from os import path
+import pandas as pd
 
 
-def embedding_api(api_key: str = None):
+def embedding_api(texts: [str], api_key: str = None):
+    vectors = []
     embeddings = OpenAIEmbeddings(api_key=api_key)
 
-    print(embeddings.embed_query('black coffee'))
+    for text in texts:
+        vectors.append(embeddings.embed_query(text))
+
+    return vectors
+
+
+def parse_menu_csv():
+    menu_items = []
+
+    menu_file_path = path.join(path.dirname(path.realpath(__file__)), "../IO", "menu.csv")
+
+    df = pd.read_csv(menu_file_path)
+
+    for index, row in df.iterrows():
+        item_name = row['item_name']
+        price = row['price']
+
+        item = {
+            "MenuItem": {
+                "itemName": item_name,
+                "price": float(price)
+            }
+        }
+
+        menu_items.append(item)
+
+    return menu_items
 
 
 def main() -> int:
@@ -14,7 +42,10 @@ def main() -> int:
         key = api_key.readline().strip()
 
 
-    embedding_api(key)
+    menu = parse_menu_csv()
+    print(menu[0])
+    vectors = embedding_api(menu, key)
+    print(len(vectors))
 
     return 0
 
