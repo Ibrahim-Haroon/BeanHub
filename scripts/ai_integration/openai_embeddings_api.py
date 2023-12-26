@@ -10,7 +10,7 @@ def embedding_api(texts: [str], api_key: str = None):
     for text in texts:
         vectors.append(embeddings.embed_query(text))
 
-    return vectors
+    return vectors, embeddings
 
 
 def parse_menu_csv():
@@ -31,7 +31,7 @@ def parse_menu_csv():
             }
         }
 
-        menu_items.append(item)
+        menu_items.append(str(item))
 
     return menu_items
 
@@ -44,7 +44,7 @@ def main() -> int:
 
     menu = parse_menu_csv()
     print(menu[0])
-    vectors = embedding_api(menu, key)
+    vectors, _ = embedding_api(menu, key)
     print(len(vectors))
 
     return 0
