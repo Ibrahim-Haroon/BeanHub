@@ -5,7 +5,7 @@ from os import path
 
 
 
-def openai_api(prompt: str, api_key: str = None, model_behavior: str = None) -> str:
+def openai_text_api(prompt: str, api_key: str = None, model_behavior: str = None) -> str:
     """
 
     @rtype: str
