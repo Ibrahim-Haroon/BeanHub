@@ -2,7 +2,13 @@ import speech_recognition as speech
 from pydub import AudioSegment
 
 
-def record_until_silence(source=None):
+def record_until_silence(source=None) -> object:
+    """
+
+    :rtype: object, str
+    :param source: .wav file = if you have an existing audio file to transcribe else use microphone
+    :return: audio recording + transcription = recording is sped up version of source
+    """
     recognizer = speech.Recognizer()
     audio_data = None
     transcribed_audio = None
@@ -50,10 +56,17 @@ def record_until_silence(source=None):
 
 
 
-def save_as_mp3(audio_data, output_filename="recorded_audio.mp3"):
+def save_as_mp3(audio_data, output_filename: str = "recorded_audio.mp3", print_completion: bool = False) -> None:
+    """
+
+    :param print_completion: bool = pass True if you want completion notification
+    :param audio_data: object to save in .mp3 format
+    :param output_filename: file name to save audio object under
+    """
     audio_segment = AudioSegment(audio_data, sample_width=2, frame_rate=44100, channels=1)
     audio_segment.export(output_filename, format="mp3")
-    print(f"Audio saved as {output_filename}")
+    if print_completion:
+        print(f"Audio saved as {output_filename}")
 
 
 if __name__ == "__main__":
