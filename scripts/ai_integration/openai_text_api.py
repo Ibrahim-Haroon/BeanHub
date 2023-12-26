@@ -4,7 +4,7 @@ from tqdm import tqdm
 from os import path
 
 
-def openai_api(prompt: str, api_key: str = None, model_behavior: str = None) -> str:
+def openai_text_api(prompt: str, api_key: str = None, model_behavior: str = None) -> str:
     if api_key:
         client = OpenAI(api_key=api_key)
     else:
@@ -46,7 +46,7 @@ def main(prompts: list[str]) -> int:
     for prompt in tqdm(prompts):
         prompt = prompt.strip()
 
-        response = openai_api(prompt, key)
+        response = openai_text_api(prompt, key)
 
         print("question: " + prompt + " response: " + response)
 

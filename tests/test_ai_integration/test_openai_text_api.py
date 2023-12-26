@@ -1,4 +1,4 @@
-from scripts.ai_integration.openai_text_api import openai_api
+from scripts.ai_integration.openai_text_api import openai_text_api
 import pytest
 from mock import MagicMock, patch
 from typing import Final
@@ -19,7 +19,7 @@ def test_openai_api(mock_openai):
 
     # Act
     with patch(script_path + '.OpenAI', return_value=mock_openai.return_value):
-        result = openai_api(prompt="Test prompt", model_behavior="System message", api_key="foo_key")
+        result = openai_text_api(prompt="Test prompt", model_behavior="System message", api_key="foo_key")
 
     # Assert
     assert result == "mocked_response"
