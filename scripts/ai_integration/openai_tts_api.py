@@ -18,7 +18,7 @@ def openai_text_to_speech_api(text: str, api_key: str = None, audio_file_path: s
 
     response = client.audio.speech.create(
         model="tts-1",
-        voice="alloy",
+        voice="nova",
         input=text
 
     )

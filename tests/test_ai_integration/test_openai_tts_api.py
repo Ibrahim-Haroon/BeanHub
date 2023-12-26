@@ -24,7 +24,7 @@ def test_openai_text_to_speech_api(mock_openai):
     # Assert
     mock_openai.return_value.audio.speech.create.assert_called_once_with(
         model="tts-1",
-        voice="alloy",
+        voice="nova",
         input="Test text"
     )
     mock_audio.stream_to_file.assert_called_once_with("test_audio.mp3")
