@@ -13,6 +13,7 @@ def main() -> int:
     with open(key_file_path) as api_key:
         key = api_key.readline().strip()
 
+
     embedding_api(key)
 
     return 0
