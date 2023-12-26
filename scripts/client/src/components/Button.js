@@ -22,6 +22,6 @@ buttonSize
             <button className={`btn ${checkButtonStyle} ${checkButtonSize}`} onClick={onClick} type={type}>
                 {children}
             </button>
-
         </Link>
+    )
 }; 

@@ -4,13 +4,17 @@ import { Link } from 'react-router-dom';
 function Navbar() {
     const [click, setClick] = useState(false); 
     const handleClick = () => setClick(!click); 
-    const closeMobileMenu => setClick(false); 
+    const closeMobileMenu = () => setClick(false); 
   return (
     <>  
         <nav className="navbar">
             <div className="navbar-container">
                 <Link to="/" className="navbar-logo">
-                    BeanHub
+<<<<<<< HEAD:scripts/ client/src/components/Navbar.js
+                    Beanhub
+=======
+                    AAAAAAAAAAAAAAAAAAAAAAAAAAA
+>>>>>>> 963cbb8e73749c659dff72ee8281d1233bc191ee:scripts/client/src/components/Navbar.js
                 </Link>
                 <div className='menu-icon'>
                     <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
