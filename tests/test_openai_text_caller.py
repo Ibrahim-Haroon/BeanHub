@@ -1,9 +1,9 @@
-from scripts.openai_integration.openai_text_caller import openai_api
+from scripts.ai_integration.openai_text_caller import openai_api
 import pytest
 from mock import MagicMock, patch
 from typing import Final
 
-script_path: Final[str] = 'scripts.openai_integration.openai_text_caller'
+script_path: Final[str] = 'scripts.ai_integration.openai_text_caller'
 
 
 @pytest.fixture
