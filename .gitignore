@@ -9,3 +9,5 @@ scripts/__pycache__/
 scripts/ai_integration/__pycache__/
 tests/__pycache__/
 tests/ai_integration/__pycache__/
+.DS_Store
+scripts/.DS_Store

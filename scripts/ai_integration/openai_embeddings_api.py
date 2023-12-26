@@ -3,6 +3,7 @@ from os import path
 import pandas as pd
 
 
+
 def embedding_api(texts: [str], api_key: str = None) -> object:
     """
 
@@ -11,6 +12,7 @@ def embedding_api(texts: [str], api_key: str = None) -> object:
     @param api_key: auth method for OpenAI
     @return: vectors of each menu item to insert into vector_db and embeddings for PGVector
     """
+    
     vectors = []
     embeddings = OpenAIEmbeddings(api_key=api_key)
 
