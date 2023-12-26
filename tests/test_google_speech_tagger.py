@@ -1,4 +1,4 @@
-from scripts.audio_recorder import record_until_silence
+from scripts.ai_integration.google_speech_tagger import record_until_silence
 from os import path
 
 script_path = 'scripts.audio_recorder'
