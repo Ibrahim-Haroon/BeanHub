@@ -9,7 +9,7 @@ def record_until_silence(source=None):
 
     if source is None:
         audio_data = []
-        with speech.Microphone() as audio_source:
+        with speech.Microphone as audio_source:
             print("Recording... Speak until you want to stop.")
 
             # Adjust for ambient noise
@@ -57,6 +57,6 @@ def save_as_mp3(audio_data, output_filename="recorded_audio.mp3"):
 
 
 if __name__ == "__main__":
-    recorded_audio, = record_until_silence()
+    recorded_audio, = record_until_silence('/Users/ibrahimharoon/Python/BeanHub/tests/test_audio.wav')
     if recorded_audio is not None:
         save_as_mp3(recorded_audio)
