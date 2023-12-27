@@ -44,15 +44,15 @@ BeanHub
 |           └── reportWebVitals.js
 |       |—— package.json
 |       |—— package-lock.json
-|—— IO
-|   |—— input
-|   |── menu.csv
-|   |—— output
-|—— server
-|   └── __init__.py
-|   |—— aws_secret.py
-|   |—— connection_string.py
-|   └── fill_vectordb.py
+|   |—— IO
+|      |—— input (untracked)
+|      |── menu.csv (untracked)
+|      |—— output (untracked)
+|   |—— server
+|      └── __init__.py
+|      |—— aws_secret.py
+|      |—— connection_string.py
+|      └── fill_vectordb.py
 |
 |—— tests
 |   |—— test_ai_integration
