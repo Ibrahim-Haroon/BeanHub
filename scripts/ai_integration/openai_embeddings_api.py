@@ -18,11 +18,11 @@ def openai_embedding_api(text: str, api_key: str = None) -> []:
 
 
 
-def parse_menu_csv() -> list[str]:
+def parse_menu_csv() -> list[dict]:
     """
 
-    @rtype: list[str]
-    @return: str menu items packaged in a list
+    @rtype: list[dict]
+    @return: JSON object menu items packaged in a list
     """
     menu_items = []
 
@@ -41,7 +41,7 @@ def parse_menu_csv() -> list[str]:
             }
         }
 
-        menu_items.append(str(item))
+        menu_items.append((item))
 
     return menu_items
 
@@ -60,7 +60,7 @@ def main(key_path: str) -> int:
     vectors = []
 
     for item in menu:
-        vectors.append(openai_embedding_api(item, key))
+        vectors.append(openai_embedding_api(str(item), key))
 
     return 0
 
