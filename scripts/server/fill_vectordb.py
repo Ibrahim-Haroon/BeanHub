@@ -3,7 +3,7 @@ from pgvector.psycopg2 import register_vector
 from scripts.ai_integration.openai_embeddings_api import *
 from scripts.server.aws_secret import get_secret
 from scripts.server.connection_string import connection_string
-from other.print_in_red import inputRED
+from other.red import inputRED
 
 
 def fill_database(data: list[dict], key: str = None) -> bool:
