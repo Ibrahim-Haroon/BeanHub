@@ -6,6 +6,13 @@ from scripts.server.connection_string import connection_string
 
 
 def fill_database(data: list[dict], key: str = None) -> bool:
+    """
+
+    @rtype: bool
+    @param data: all the menu items which have to be embedded and inserted in DB
+    @param key: key for OpenAI auth
+    @return: true if successfully created and filled table
+    """
     get_secret()
 
     db_connection = psycopg2.connect(connection_string())
