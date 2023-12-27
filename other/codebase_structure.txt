@@ -2,8 +2,11 @@ BeanHub
 |—— .github
 |   └── workflows
 |       └── unit-test.yml
+|
 |—— other
 |   |—— api_key.txt (untracked)
+|   |—— aws-info.csv (untracked)
+|   |—— database-info.csv (untracked)
 |   |—— images
 |       |—— architecture.drawio.png
 |       |—— bean_logo.png
@@ -11,6 +14,7 @@ BeanHub
 |       └── timeline.drawio.png
 |   |—— codebase_structure.txt
 |   └── red.py
+|
 |—— scripts
 |   └── ai_integration
 |       └── __init__.py
@@ -42,13 +46,14 @@ BeanHub
 |       |—— package-lock.json
 |—— IO
 |   |—— input
-|       └── menu.csv
+|   |── menu.csv
 |   |—— output
 |—— server
 |   └── __init__.py
 |   |—— aws_secret.py
 |   |—— connection_string.py
 |   └── fill_vectordb.py
+|
 |—— tests
 |   |—— test_ai_integration
 |       └── __init__.py
