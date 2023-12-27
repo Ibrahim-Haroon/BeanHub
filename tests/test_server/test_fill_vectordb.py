@@ -36,6 +36,12 @@ def mock_connect():
 @pytest.fixture
 def mock_get_secret():
     with patch('scripts.server.aws_secret.get_secret') as mock:
+        mock.return_value = {
+            'secret_name': 'secret_name',
+            'region_name': 'region_name',
+            'aws_access_key_id': 'aws_access_key_id',
+            'aws_secret_access_key': 'aws_secret_access_key'
+        }
         yield mock
 
 
@@ -83,4 +89,3 @@ def test_fill_database_wrong_passkey(mock_input):
 
     # Assert
     assert result is False
-
