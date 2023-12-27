@@ -3,6 +3,7 @@ from pgvector.psycopg2 import register_vector
 from scripts.ai_integration.openai_embeddings_api import *
 from scripts.server.aws_secret import get_secret
 from scripts.server.connection_string import connection_string
+from other.print_in_red import inputRED
 
 
 def fill_database(data: list[dict], key: str = None) -> bool:
@@ -13,8 +14,14 @@ def fill_database(data: list[dict], key: str = None) -> bool:
     @param key: key for OpenAI auth
     @return: true if successfully created and filled table
     """
-    get_secret()
 
+    if (inputRED() != "YES"):
+        return False
+    else:
+        if (str(input("Enter the passkey to confirm: ")) != "beanKnowsWhatBeanWants"):
+            return False
+
+    get_secret()
     db_connection = psycopg2.connect(connection_string())
     db_connection.set_session(autocommit=True)
 
