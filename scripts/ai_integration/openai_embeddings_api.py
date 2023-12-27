@@ -3,30 +3,26 @@ from os import path
 import pandas as pd
 
 
-
-def openai_embedding_api(texts: [dict], api_key: str = None) -> object:
+def openai_embedding_api(text: str, api_key: str = None) -> []:
     """
 
     @rtype: list[list[float]], embeddings object
-    @param texts: list[dict] = Json object menu items which contain item name and price
+    @param text: str = contains item name and price
     @param api_key: auth method for OpenAI
-    @return: vectors of each menu item to insert into vector_db and embeddings for PGVector
+    @return: vectors of each menu item to insert into vector_db
     """
-    
-    vectors = []
+
     embeddings = OpenAIEmbeddings(api_key=api_key)
 
-    for text in texts:
-        vectors.append(embeddings.embed_query(text))
-
-    return vectors, embeddings
+    return embeddings.embed_query(text)
 
 
-def parse_menu_csv() -> list[dict]:
+
+def parse_menu_csv() -> list[str]:
     """
 
-    @rtype: list[dict]
-    @return: Json object menu items packaged in a list
+    @rtype: list[str]
+    @return: str menu items packaged in a list
     """
     menu_items = []
 
@@ -45,7 +41,7 @@ def parse_menu_csv() -> list[dict]:
             }
         }
 
-        menu_items.append((item))
+        menu_items.append(str(item))
 
     return menu_items
 
@@ -60,7 +56,11 @@ def main(key_path: str) -> int:
         key = api_key.readline().strip()
 
     menu = parse_menu_csv()
-    vectors, _ = openai_embedding_api(menu, key)
+
+    vectors = []
+
+    for item in menu:
+        vectors.append(openai_embedding_api(item, key))
 
     return 0
 
