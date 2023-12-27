@@ -4,7 +4,7 @@ import pandas as pd
 
 
 
-def embedding_api(texts: [str], api_key: str = None) -> object:
+def openai_embedding_api(texts: [str], api_key: str = None) -> object:
     """
 
     @rtype: list[list[float]], embeddings object
@@ -60,7 +60,7 @@ def main(key_path: str) -> int:
         key = api_key.readline().strip()
 
     menu = parse_menu_csv()
-    vectors, _ = embedding_api(menu, key)
+    vectors, _ = openai_embedding_api(menu, key)
 
     return 0
 

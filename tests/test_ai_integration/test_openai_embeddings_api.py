@@ -8,11 +8,11 @@ script_path: Final[str] = 'scripts.ai_integration.openai_embeddings_api'
 
 
 @pytest.fixture
-def mock_openai_embeddings(mocker):
+def mock_openai(mocker):
     return mocker.patch(script_path + '.OpenAIEmbeddings')
 
 
-def test_openai_api(mock_openai_embeddings):
+def test_openai_embeddings_api(mock_openai_embeddings):
     # Arrange
     expected_embeddings_instance = MagicMock()
     mock_openai_embeddings.return_value = expected_embeddings_instance
@@ -20,7 +20,7 @@ def test_openai_api(mock_openai_embeddings):
     expected_embeddings_instance.embed_query.side_effect = expected_vectors
 
     # Act
-    result_vectors, result_embeddings = embedding_api(texts=["text1", "text2"], api_key="foo_key")
+    result_vectors, result_embeddings = openai_embedding_api(texts=["text1", "text2"], api_key="foo_key")
 
     # Assert
     assert result_vectors == expected_vectors
