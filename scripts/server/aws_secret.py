@@ -6,6 +6,7 @@ from aiohttp import ClientError
 
 def get_secret() -> str:
     """
+
     @purpose: validate Amazon SDK
     @rtype: str
     @return: secret response
