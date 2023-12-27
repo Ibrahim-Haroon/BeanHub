@@ -11,4 +11,5 @@ tests/__pycache__/
 tests/ai_integration/__pycache__/
 .DS_Store
 scripts/.DS_Store
+other/aws-info.csv
 other/database-info.csv
