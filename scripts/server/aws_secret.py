@@ -4,12 +4,12 @@ from os import path
 from botocore.exceptions import ClientError
 
 
-def get_secret() -> str:
+def get_secret() -> dict:
     """
 
     @purpose: validate Amazon SDK
-    @rtype: str
-    @return: secret response
+    @rtype: dict
+    @return: ex. {"username":"username","password":"pass","engine":"engine","host":"host","port":5432,"dbname":"name","dbInstanceIdentifier":"db-id"}
     """
     secret_file_path = path.join(path.dirname(path.realpath(__file__)), "../..", "other", "aws-info.csv")
 
@@ -37,3 +37,7 @@ def get_secret() -> str:
         raise e
 
     return get_secret_value_response['SecretString']
+
+
+if __name__ == "__main__":
+    get_secret()
