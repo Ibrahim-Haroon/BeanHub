@@ -7,7 +7,7 @@ from scripts.ai_integration.nlp_bard import nlp_bard
 import numpy as np
 
 
-def similarity_search(order: str, key: str = None, aws_csv_file: StringIO = None, database_csv_file: StringIO = None) -> [[]]:
+def similarity_search(order: str, key: str = None, aws_csv_file: StringIO = None, database_csv_file: StringIO = None) -> object:
     formatted_string = nlp_bard(order)
 
     embedding = openai_embedding_api(formatted_string, key)
@@ -24,8 +24,10 @@ def similarity_search(order: str, key: str = None, aws_csv_file: StringIO = None
                 (np.array(embedding),))
     results = cur.fetchall()
 
+    cur.close()
+    db_connection.close()
 
-    return results
+    return results, True
 
 
 def main() -> int:
