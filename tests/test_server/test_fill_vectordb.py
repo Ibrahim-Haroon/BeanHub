@@ -1,23 +1,57 @@
-import pandas as pd
 import pytest
-from unittest.mock import patch, MagicMock, mock_open
+from unittest.mock import patch, MagicMock
 from scripts.server.fill_vectordb import fill_database
-from os import path
+from io import StringIO
+import csv
 
 
 @pytest.fixture
 def mock_components(mocker):
     return {
         'openai_embedding_api': mocker.patch('scripts.server.fill_vectordb.openai_embedding_api'),
-        'connection_string': mocker.patch('script_path.connection_string.connection_string'),
+        'connection_string': mocker.patch('scripts.server.connection_string.connection_string'),
         'register_vector': mocker.patch('pgvector.psycopg2.register_vector'),
-        'connect': mocker.patch('psycopg2.connect'),
+        'connect': mocker.patch('scripts.server.fill_vectordb.psycopg2.connect'),
         'input': mocker.patch('builtins.input'),
     }
 
 
-@patch('builtins.input', return_value="NO")
-def test_fill_database_input_red_no(mock_components):
+@pytest.fixture()
+def mock_boto3_session_client(mocker):
+    return mocker.patch('boto3.session.Session.client', return_value=MagicMock())
+
+
+def as_csv_file(data: [[str]]) -> StringIO:
+    file_object = StringIO()
+    writer = csv.writer(file_object)
+    writer.writerows(data)
+    file_object.seek(0)
+
+    return file_object
+
+
+@patch('builtins.input', side_effect=["YES", "beanKnowsWhatBeanWants"])
+def test_fill_database_returns_true_if_pass_auth(mocker, mock_components, mock_boto3_session_client):
+    # Arrange
+    data = [{"MenuItem": {"itemName": "TestItem", "price": 10.0}}]
+    key = "mock_api_key"
+    database_info = [
+        ["dbname", "user", "password", "host", "port"],
+        ["mydb", "myuser", "mypassword", "localhost", "port"]]
+    aws_info = [
+        ["secret_name", "region_name", "aws_access_key_id", "aws_secret_access_key"],
+        ["name", "us-east-1", "aws_access_key_id", "aws_secret_access_key"]]
+
+
+    # Act
+    result = fill_database(data, key, as_csv_file(aws_info), as_csv_file(database_info))
+
+    # Assert
+    assert result is True, f"expect True but got {result}"
+
+
+@patch('builtins.input', side_effect=["YES", "wrong_passkey"])
+def test_fill_database_exits_when_wrong_passkey_given(mock_components):
     # Arrange
     data = [{"MenuItem": {"itemName": "Test", "price": 0.0}}]
     key = "mock_key"
@@ -29,14 +63,15 @@ def test_fill_database_input_red_no(mock_components):
     assert result is False
 
 
-@patch('builtins.input', side_effect=["YES", "wrong_passkey"])
-def test_fill_database_wrong_passkey(mock_components):
+
+@patch('builtins.input', return_value="NO")
+def test_fill_database_exits_when_no_entered(mock_components):
     # Arrange
-    data = [{"MenuItem": {"itemName": "Item1", "price": 10.0}}]
-    key = "your_key_here"
+    data = [{"MenuItem": {"itemName": "Test", "price": 0.0}}]
+    key = "mock_key"
 
     # Act
     result = fill_database(data, key)
 
     # Assert
-    assert result is False
+    assert result is False, f"expect False but got {result}"
