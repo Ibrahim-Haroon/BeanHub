@@ -1,7 +1,7 @@
 import boto3
 import pandas as pd
 from os import path
-from aiohttp import ClientError
+from botocore.exceptions import ClientError
 
 
 def get_secret() -> str:
@@ -11,7 +11,7 @@ def get_secret() -> str:
     @rtype: str
     @return: secret response
     """
-    secret_file_path = connection_string_file_path = path.join(path.dirname(path.realpath(__file__)), "../..", "other", "aws-info.csv")
+    secret_file_path = path.join(path.dirname(path.realpath(__file__)), "../..", "other", "aws-info.csv")
 
     df = pd.read_csv(secret_file_path)
     row = df.iloc[0]
