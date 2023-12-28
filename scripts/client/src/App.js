@@ -7,7 +7,6 @@ import AboutUs from './components/pages/AboutUs';
 import Features from './components/pages/Features';
 import TryBeanhub from './components/pages/TryBeanhub';
 
-
 function App() {
   return (
     <>

@@ -15,20 +15,22 @@
 }
 
 .aboutus {
-
+  background: url('./components/images/logo.png');
   background-position: center;
-  background-size: fill;
+  background-size: cover;  /* Use 'cover' to make the image cover the whole container */
   background-repeat: no-repeat;
   color: black;
   font-size: 100px;
+  height: 100vh;  /* Set height to 100% of the viewport height */
 }
+
 
 .trybeanhub {
-
+  background: url('./components/images/logo.png');
   background-position: center;
-  background-size: fill;
+  background-size: cover;  /* Use 'cover' to make the image cover the whole container */
   background-repeat: no-repeat;
   color: black;
   font-size: 100px;
+  height: 100vh;  /* Set height to 100% of the viewport height */
 }
-
