@@ -1,13 +1,11 @@
 import pytest
-from mock import mock_open, mock, patch
-import boto3
-from aiohttp import ClientError
+from mock import mock_open, mock, patch, MagicMock
+from botocore.exceptions import ClientError
 from scripts.server.aws_secret import get_secret
 import pandas as pd
 from os import path
 
 
-# Define a fixture for mocking pandas.read_csv
 @pytest.fixture
 def mock_pandas_read_csv(mocker):
     # Mock the read_csv function to return a sample DataFrame without reading the actual file
@@ -19,9 +17,9 @@ def mock_pandas_read_csv(mocker):
         # Patch pandas.read_csv to return a DataFrame
         mocker.patch('pandas.read_csv', return_value=pd.DataFrame({
             'secret_name': ['test_secret'],
-            'region_name': ['us-east-1'],
-            'aws_access_key_id': ['test_access_key'],
-            'aws_secret_access_key': ['test_secret_key']
+            'region_name': ['region_name'],
+            'aws_access_key_id': ['aws_access_key_id'],
+            'aws_secret_access_key': ['aws_secret_access_key']
         }))
 
         mocker.patch('os.path.join', return_value=secret_file_path)
@@ -29,25 +27,14 @@ def mock_pandas_read_csv(mocker):
         yield secret_file_path
 
 
-# Define a fixture for mocking boto3.session.Session.client
 @pytest.fixture
 def mock_boto3_session_client(mocker):
     return mocker.patch('boto3.session.Session.client', return_value=mock.MagicMock())
 
 
-# Define a fixture for mocking boto3.client.get_secret_value
-@pytest.fixture
-def mock_boto3_get_secret_value():
-    with patch('scripts.server.aws_secret.boto3.client') as mock_client:
-        mock_secret_value = {'SecretString': '{"key": "value"}'}
-        mock_client.return_value.get_secret_value.return_value = mock_secret_value
-        yield mock_client, mock_secret_value
-
-
-# Test the get_secret function
-def test_get_secret(mock_pandas_read_csv, mock_boto3_session_client, mock_boto3_get_secret_value):
+def test_get_secret_returns_mock_object_is_expected_success(mock_pandas_read_csv, mock_boto3_session_client):
     # Arrange
-    mock_client, expected_result = mock_boto3_get_secret_value
+    expected_result = MagicMock
 
     # Act
     result = get_secret()
@@ -55,8 +42,18 @@ def test_get_secret(mock_pandas_read_csv, mock_boto3_session_client, mock_boto3_
     # Assert
     mock_boto3_session_client.assert_called_once_with(
         service_name='secretsmanager',
-        region_name='us-east-1',
-        aws_access_key_id='test_access_key',
-        aws_secret_access_key='test_secret_key'
+        region_name='region_name',
+        aws_access_key_id='aws_access_key_id',
+        aws_secret_access_key='aws_secret_access_key'
     )
+    assert isinstance(result, expected_result)
 
+
+def test_get_secret_returns_client_error(mock_pandas_read_csv, mock_boto3_session_client):
+    # Arrange
+    mock_client = mock_boto3_session_client.return_value
+    mock_client.get_secret_value.side_effect = ClientError({'Error': {}}, 'operation_name')
+
+    # Act and Assert
+    with pytest.raises(ClientError):
+        get_secret()
