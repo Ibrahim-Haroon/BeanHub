@@ -1,2 +1,29 @@
 item_name,price
-black coffee,3.50
+Espresso, 5.00
+Double Espresso, 5.00
+Latte, 5.00
+Americano, 7.00
+Macchiato, 8.00
+Flat White, 9.00
+Cappuccino, 10.00
+
+Hot chocolate, 5.00
+Milkshake, 5.00
+Smoothie, 5.00
+Lemonade, 7.00
+Vanilla milkshake, 8.00
+
+Donut, 5.00
+Cinnamon Roll, 5.00
+Lemon pie, 5.00
+Brownie, 5.00
+
+Lemon tea, 5.00
+Mango tea, 5.00
+Jasmine, 7.00
+Green tea, 10.00
+Mint tea, 10.00
+
+Non-Coffee + Dessert (Combo 1), 8.00
+Coffee + Dessert (Combo 2), 9.00
+Tea + Dessert (Combo 3), 11.00

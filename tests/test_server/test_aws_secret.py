@@ -55,3 +55,4 @@ def test_get_secret_to_throw_exception_when_given_error(mock_pandas_read_csv, mo
         get_secret()
 
     assert f"expected exception to be thrown when given error but got None"
+

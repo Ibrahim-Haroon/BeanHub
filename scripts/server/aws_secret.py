@@ -8,7 +8,7 @@ import sys
 
 def get_secret(csv_file: StringIO = None) -> dict:
     """
-
+    
     @purpose: validate Amazon SDK
     @rtype: dict
     @param csv_file: can be passed if you want to pass in own AWS authentication and is used for unit tests

@@ -52,9 +52,25 @@ def test_fill_database_returns_true_if_pass_auth(mocker, mock_components, mock_b
 
 @patch('builtins.input', side_effect=["YES", "wrong_passkey"])
 def test_fill_database_exits_when_wrong_passkey_given(mock_components):
+=======
+@patch('builtins.input', return_value="NO")
+def test_fill_database_input_red_no(mock_components):
     # Arrange
-    data = [{"MenuItem": {"itemName": "Item1", "price": 10.0}}]
-    key = "your_key_here"
+    data = [{"MenuItem": {"itemName": "Test", "price": 0.0}}]
+    key = "mock_key"
+
+    # Act
+    result = fill_database(data, key)
+
+    # Assert
+    assert result is False
+
+
+@patch('builtins.input', side_effect=["YES", "wrong_passkey"])
+def test_fill_database_exits_when_wrong_passkey_given(mock_components):
+    # Arrange
+    data = [{"MenuItem": {"itemName": "Test", "price": 0.0}}]
+    key = "mock_key"
 
     # Act
     result = fill_database(data, key)
