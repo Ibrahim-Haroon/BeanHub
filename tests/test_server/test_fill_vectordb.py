@@ -60,7 +60,7 @@ def test_fill_database_exits_when_wrong_passkey_given(mock_components):
     result = fill_database(data, key)
 
     # Assert
-    assert result is False
+    assert result is False, f"expected False but got {result}"
 
 
 
@@ -75,3 +75,4 @@ def test_fill_database_exits_when_no_entered(mock_components):
 
     # Assert
     assert result is False, f"expect False but got {result}"
+
