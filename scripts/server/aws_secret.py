@@ -2,18 +2,28 @@ import boto3
 import pandas as pd
 from os import path
 from botocore.exceptions import ClientError
+from io import StringIO
+import sys
 
 
-def get_secret() -> dict:
+def get_secret(csv_file: StringIO = None) -> dict:
     """
 
     @purpose: validate Amazon SDK
     @rtype: dict
+    @param csv_file: can be passed if you want to pass in own AWS authentication and is used for unit tests
     @return: ex. {"username":"username","password":"pass","engine":"engine","host":"host","port":5432,"dbname":"name","dbInstanceIdentifier":"db-id"}
     """
-    secret_file_path = path.join(path.dirname(path.realpath(__file__)), "../..", "other", "aws-info.csv")
 
-    df = pd.read_csv(secret_file_path)
+    if csv_file is None:
+        secret_file_path = path.join(path.dirname(path.realpath(__file__)), "../..", "other", "aws-info.csv")
+        df = pd.read_csv(secret_file_path)
+    elif isinstance(csv_file, StringIO):
+        df = pd.read_csv(csv_file)
+    else:
+        sys.stderr.write(f"Must either use default csv file path or pass in a csv file, got {type(csv_file)}.")
+        exit(1)
+
     row = df.iloc[0]
 
     secret_name = row['secret_name']

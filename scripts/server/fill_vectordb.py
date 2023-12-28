@@ -4,14 +4,17 @@ from scripts.ai_integration.openai_embeddings_api import *
 from scripts.server.aws_secret import get_secret
 from scripts.server.connection_string import connection_string
 from other.red import inputRED
+from io import StringIO
 
 
-def fill_database(data: list[dict], key: str = None) -> bool:
+def fill_database(data: list[dict], key: str = None, aws_csv_file: StringIO = None, database_csv_file: StringIO = None) -> bool:
     """
 
     @rtype: bool
     @param data: all the menu items which have to be embedded and inserted in DB
     @param key: key for OpenAI auth
+    @param aws_csv_file: can be passed if you want to pass in own AWS authentication and is used for unit tests
+    @param database_csv_file: can be passed if you want to pass in own database authentication and is used for unit tests
     @return: true if successfully created and filled table
     """
 
@@ -21,8 +24,8 @@ def fill_database(data: list[dict], key: str = None) -> bool:
         if (str(input("Enter the passkey to confirm: ")) != "beanKnowsWhatBeanWants"):
             return False
 
-    get_secret()
-    db_connection = psycopg2.connect(connection_string())
+    get_secret(aws_csv_file if not None else None)
+    db_connection = psycopg2.connect(connection_string(database_csv_file if not None else None))
     db_connection.set_session(autocommit=True)
 
     cur = db_connection.cursor()
