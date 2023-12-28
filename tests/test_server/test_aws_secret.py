@@ -56,3 +56,16 @@ def test_get_secret_to_throw_exception_when_given_error(mock_pandas_read_csv, mo
 
     assert f"expected exception to be thrown when given error but got None"
 
+
+@patch('sys.stderr.write')
+@patch('sys.exit')
+def test_that_connection_string_exits_when_invalid_file_passed(mock_exit, mock_stderr_write):
+    # Arrange
+    invalid_file = "invalid_file"
+    expected_error_message = f"Must either use default csv file path or pass in a csv file, got {type(invalid_file)}."
+
+    # Act and Assert
+    with pytest.raises(SystemExit) as e:
+        _ = get_secret(invalid_file)
+
+    assert str(e.value) == expected_error_message, f"expected system to exit with {expected_error_message} but got {str(e.value)}"
