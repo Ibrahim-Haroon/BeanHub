@@ -5,3 +5,29 @@
   font-family: 'PT Sans', sans-serif;
 }
 
+.features {
+  
+  background-position: center;
+  background-size: fill;
+  background-repeat: no-repeat;
+  color: black;
+  font-size: 100px;
+}
+
+.aboutus {
+
+  background-position: center;
+  background-size: fill;
+  background-repeat: no-repeat;
+  color: black;
+  font-size: 100px;
+}
+
+.trybeanhub {
+
+  background-position: center;
+  background-size: fill;
+  background-repeat: no-repeat;
+  color: black;
+  font-size: 100px;
+}
