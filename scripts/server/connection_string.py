@@ -17,8 +17,7 @@ def connection_string(csv_file: StringIO = None) -> str:
     elif isinstance(csv_file, StringIO):
         df = pd.read_csv(csv_file)
     else:
-        sys.stderr.write(f"Must either use default csv file path or pass in a csv file, got {type(csv_file)}.")
-        exit(1)
+        raise SystemExit(f"Must either use default csv file path or pass in a csv file, got {type(csv_file)}.")
 
     row = df.iloc[0]
 
