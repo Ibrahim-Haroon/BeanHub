@@ -1,17 +1,17 @@
 import boto3
 import pandas as pd
 from os import path
-from aiohttp import ClientError
+from botocore.exceptions import ClientError
 
 
-def get_secret() -> str:
+def get_secret() -> dict:
     """
 
     @purpose: validate Amazon SDK
-    @rtype: str
-    @return: secret response
+    @rtype: dict
+    @return: ex. {"username":"username","password":"pass","engine":"engine","host":"host","port":5432,"dbname":"name","dbInstanceIdentifier":"db-id"}
     """
-    secret_file_path = connection_string_file_path = path.join(path.dirname(path.realpath(__file__)), "../..", "other", "aws-info.csv")
+    secret_file_path = path.join(path.dirname(path.realpath(__file__)), "../..", "other", "aws-info.csv")
 
     df = pd.read_csv(secret_file_path)
     row = df.iloc[0]
@@ -37,3 +37,7 @@ def get_secret() -> str:
         raise e
 
     return get_secret_value_response['SecretString']
+
+
+if __name__ == "__main__":
+    get_secret()
