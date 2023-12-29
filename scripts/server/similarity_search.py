@@ -21,9 +21,9 @@ def similarity_search(order: str, top_k: int = 3, key: str = None, aws_csv_file:
     if not order:
         return None, False
 
-    formatted_string = ner_transformer(order)
+    formatted_thing = ner_transformer(order)
 
-    embedding = openai_embedding_api(formatted_string, key)
+    embedding = openai_embedding_api(str(formatted_thing), key)
 
 
     get_secret(aws_csv_file if not None else None)
