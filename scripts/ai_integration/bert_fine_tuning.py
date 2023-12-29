@@ -1,16 +1,17 @@
-from os import path
+import os
 import pandas as pd
 from io import StringIO
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import LabelEncoder
-from simpletransformers.ner import NERModel,NERArgs
+from simpletransformers.ner import NERModel, NERArgs
 from sklearn.model_selection import train_test_split
+from other.red import inputRED
 
 
 def load_data(csv_file: StringIO = None, display_data: bool = False) -> pd.core.frame.DataFrame:
 
     if csv_file is None:
-        data_path = path.join(path.dirname(path.realpath(__file__)), "../..", "other/datasets", "ner_dataset.csv")
+        data_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../..", "other/datasets", "ner_dataset.csv")
         data = pd.read_csv(data_path)
     elif isinstance(csv_file, StringIO):
         data = pd.read_csv(csv_file)
@@ -58,6 +59,13 @@ def separate_into_test_and_train(data: pd.core.frame.DataFrame) -> object:
 
 
 def fine_tune_bert(model_save_path: str = None) -> bool:
+
+    if (inputRED("ARE YOU SURE YOU WANT TO DELETE AND REFINE BERT: ") != "YES"):
+        return False
+    else:
+        if (str(input("Enter the passkey to confirm: ")) != "beanKnowsWhatBeanWants"):
+            return False
+
     data = load_data()
 
     if data.empty:
@@ -76,11 +84,11 @@ def fine_tune_bert(model_save_path: str = None) -> bool:
     if model_save_path:
         model.save_model(model_save_path)
     else:
-        save_path = path.join(path.dirname(path.realpath(__file__)), "../..", "other/genai_models")
+        save_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../..", "other/genai_models")
         model.save_model(save_path)
 
-    return True
 
+    return True
 
 
 def main() -> int:
