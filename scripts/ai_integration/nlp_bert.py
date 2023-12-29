@@ -1,16 +1,16 @@
+from transformers import AutoModel
+from os import path
 
 
-def load_str(string: str = None, file: str = None) -> str:
-    return "parse_data"
+def ner_transformer(input_string: str = None):
+    transformer_file_path = path.join(path.dirname(path.realpath(__file__)), "../..", "other/genai_models")
 
+    model = AutoModel.from_pretrained(transformer_file_path)
 
-def nlp_bert(input_string: str = None, file_path: str = None) -> str:
-    formatted_str = load_str()
+    prediction, _ = model.predict([input_string])
 
-    # TODO: implement
-
-    return input_string
+    print(type(prediction))
 
 
 if __name__ == "__main__":
-    nlp_bert()
+    ner_transformer()
