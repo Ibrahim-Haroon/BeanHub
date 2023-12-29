@@ -8,7 +8,7 @@ from scripts.server.similarity_search import similarity_search
 @pytest.fixture
 def mock_components(mocker):
     return {
-        'nlp_bard': mocker.patch('scripts.ai_integration.nlp_bard'),
+        'nlp_bard': mocker.patch('scripts.ai_integration.nlp_bert'),
         'openai_embedding_api': mocker.patch('scripts.server.similarity_search.openai_embedding_api'),
         'connection_string': mocker.patch('scripts.server.connection_string.connection_string'),
         'connect': mocker.patch('scripts.server.similarity_search.psycopg2.connect'),
