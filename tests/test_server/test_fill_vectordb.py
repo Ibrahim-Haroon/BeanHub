@@ -1,5 +1,5 @@
 import pytest
-from unittest.mock import patch, MagicMock
+from mock import patch, MagicMock
 from scripts.server.fill_vectordb import fill_database
 from io import StringIO
 import csv
