@@ -26,7 +26,6 @@
 
 
 .trybeanhub {
-  background: url('./components/images/logo.png');
   background-position: center;
   background-size: cover;  /* Use 'cover' to make the image cover the whole container */
   background-repeat: no-repeat;
