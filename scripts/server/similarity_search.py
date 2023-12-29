@@ -31,7 +31,7 @@ def similarity_search(order: str, top_k: int = 3, key: str = None, aws_csv_file:
     db_connection.set_session(autocommit=True)
 
     cur = db_connection.cursor()
-    cur.execute(f""" SELECTED id, item_name, price, embeddings
+    cur.execute(f""" SELECTED id, item_name, item_quantity, common_allergin, num_calories, price, embeddings
                     FROM products
                     ORDER BY embeddings <-> %s limit {top_k};""",
                 (np.array(embedding),))
