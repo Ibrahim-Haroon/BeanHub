@@ -31,14 +31,14 @@ def contains(order: str, top_k: int = 3, key: str = None, aws_csv_file: StringIO
     db_connection.set_session(autocommit=True)
 
     cur = db_connection.cursor()
-    sql_query = """SELECT id, item_name, item_quantity, price, embeddings
+    sql_query = """SELECT id, item_name, item_quantity, common_allergin, num_calories, price, embeddings
                    FROM products
                    WHERE item_quantity >= %s
                    ORDER BY embeddings <-> %s LIMIT 1;"""
 
     # Execute the query with both quantity and embedding as parameters
 
-    cur.execute(sql_query, (5, np.array(embedding)))
+    cur.execute(sql_query, ("FILL_item_quantity", np.array(embedding)))
     results = cur.fetchall()
 
     cur.close()
@@ -52,7 +52,7 @@ def main() -> int:
     with open(key_path) as api_key:
         key = api_key.readline().strip()
 
-    similarity_search(order="dummy", key=key)
+    contains(order="dummy", key=key)
 
     return 0
 
