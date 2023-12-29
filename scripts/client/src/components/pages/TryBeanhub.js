@@ -1,6 +1,17 @@
+// TryBeanhub.js
 import React from 'react';
 import '../../App.css';
+import Chatbot from '../Chatbot';
+import Footer from '../Footer';
+import Order from '../Order';
 
-export default function TryBeanhub() {
-  return <h1 className='trybeanhub'>TRY BEAHNHUB</h1>;
+function TryBeanhub() {
+  return (
+    <>
+      <Order />
+      <Footer />
+    </>
+  );
 }
+
+export default TryBeanhub;
