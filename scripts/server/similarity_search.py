@@ -3,7 +3,7 @@ from io import StringIO
 from scripts.server.aws_secret import get_secret
 from scripts.ai_integration.openai_embeddings_api import *
 from scripts.server.connection_string import connection_string
-from scripts.ai_integration.nlp_bert import nlp_bert
+from scripts.ai_integration.nlp_bert import ner_transformer
 import numpy as np
 
 
@@ -21,7 +21,7 @@ def similarity_search(order: str, top_k: int = 3, key: str = None, aws_csv_file:
     if not order:
         return None, False
 
-    formatted_string = nlp_bert(order)
+    formatted_string = ner_transformer(order)
 
     embedding = openai_embedding_api(formatted_string, key)
 
