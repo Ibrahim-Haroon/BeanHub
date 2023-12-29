@@ -37,6 +37,7 @@ def fill_database(data: list[dict], key: str = None, aws_csv_file: StringIO = No
             CREATE TABLE IF NOT EXISTS products (
                 id SERIAL PRIMARY KEY,
                 item_name text,
+                item_quantity int,
                 price double precision,
                 embeddings vector(1536)
             );
@@ -44,9 +45,9 @@ def fill_database(data: list[dict], key: str = None, aws_csv_file: StringIO = No
 
     for item in data:
         cur.execute("""
-            INSERT INTO products (item_name, price, embeddings)
-            VALUES (%s, %s, %s);
-        """, (item["MenuItem"]["itemName"], item["MenuItem"]["price"], openai_embedding_api(str(item), key)))
+            INSERT INTO products (item_name, item_quantity, price, embeddings)
+            VALUES (%s, %s, %s, %s);
+        """, (item["MenuItem"]["itemName"], item["MenuItem"]["item_quantity"], item["MenuItem"]["price"], openai_embedding_api(str(item), key)))
 
     cur.execute("""
             CREATE INDEX ON products
