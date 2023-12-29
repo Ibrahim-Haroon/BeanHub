@@ -1,6 +1,7 @@
 import pytest
 from unittest.mock import patch, MagicMock
 from io import StringIO
+import csv
 from scripts.server.similarity_search import similarity_search
 from scripts.server.connection_string import connection_string
 
@@ -29,3 +30,6 @@ def as_csv_file(data: [[str]]) -> StringIO:
     return file_object
 
 
+def test_similarity_search(mocker):
+
+    assert 1 == 1
