@@ -3,26 +3,31 @@ from os import path
 from word2number import w2n
 
 
-def ner_transformer(input_string: str = None) -> list:
+def ner_transformer(input_string: str = None, print_prediction: bool = False) -> list:
     transformer_file_path = path.join(path.dirname(path.realpath(__file__)), "../..", "other/genai_models/outputs")
 
-    # model = AutoModel.from_pretrained(transformer_file_path)
+    model = AutoModel.from_pretrained(transformer_file_path)
 
-    # prediction, _ = model.predict([input_string])
+    prediction, _ = model.predict([input_string])
 
-    return "fix"
+    if print_prediction:
+        print(prediction)
+
+    return prediction
 
 
-def format_ner(ner_prediction: list):
+def format_ner(ner_prediction: list, print_final_format: bool = False):
     order = []
     formatted_order = []
 
+    # removes any Outliers
     for prediction in ner_prediction:
         for entity_dict in prediction:
             for word, tag in entity_dict.items():
                 if tag != 'O':
                     order.append(entity_dict)
 
+    # turns all B_QUANTITIES into I_QUANTITIES
     temp = None
     for pair in order:
         for word, tag in pair.items():
@@ -35,32 +40,27 @@ def format_ner(ner_prediction: list):
             else:
                 formatted_order.append(pair)
 
-    res = []
+    intermittent_format = []
     for pair in formatted_order:
         for word, tag in pair.items():
-            res.append([word, tag])
+            intermittent_format.append([word, tag])
 
-    res1 = []
-    for i in range(len(res)):
-        if res[i][1] != 'I_QUANTITY':
-            res1.append(res[i][0])
-            if i == len(res)-1:
-                res1.append(1)
-        elif res[i][1] == 'I_QUANTITY' and isinstance(res[i][0], str):
-                res1.append(w2n.word_to_num(res[i][0]))
+    formatted_order = []
+    prev_index = None
+    for i in range(len(intermittent_format)):
+        if intermittent_format[i][1] != 'I_QUANTITY':
+            formatted_order.append([intermittent_format[i][0], -1])
+            if i == len(intermittent_format) - 1:
+                formatted_order[-1][1] = 1
+            else:
+                prev_index = i
+        elif intermittent_format[i][1] == 'I_QUANTITY' and isinstance(intermittent_format[i][0], str):
+            formatted_order[prev_index][1] = w2n.word_to_num(intermittent_format[i][0])
 
-
-    print(res1)
+    if print_final_format:
+        print(formatted_order)
+    return formatted_order
 
 
 if __name__ == "__main__":
-    # pred = [[{'if': 'O'}, {'you': 'O'}, {'have': 'O'}, {'any': 'O'}, {'more': 'O'}, {'cinnamon rolls': 'B_BAKERY_ITEM'},
-    #          {'left': 'O'}, {'I’ll': 'O'}, {'take': 'O'}, {'one': 'I_QUANTITY'}, {'and': 'O'}, {'then': 'O'},
-    #          {'also': 'O'}, {'just': 'O'}, {'a': 'O'}, {'black coffee': 'B_COFFEE_TYPE'}]]
-
-    pred = [[{'if': 'O'}, {'you': 'O'}, {'have': 'O'}, {'one': 'B_QUANTITY'}, {'cinnamon roll': 'I_BAKERY_ITEM'},
-             {'left': 'O'}, {'I’ll': 'O'}, {'take': 'O'}, {'it': 'O'}, {'and': 'O'}, {'then': 'O'},
-             {'also': 'O'}, {'just': 'O'}, {'a': 'O'}, {'black coffee': 'B_COFFEE_TYPE'}]]
-    res = format_ner(pred)
-
-    print(res)
+    ner_transformer()
