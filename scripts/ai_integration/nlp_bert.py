@@ -8,12 +8,12 @@ def ner_transformer(input_string: str = None, print_prediction: bool = False) ->
 
     model = AutoModel.from_pretrained(transformer_file_path)
 
-    prediction, _ = model.predict([input_string])
+    # prediction, _ = model.predict([input_string])
 
-    if print_prediction:
-        print(prediction)
+    # if print_prediction:
+        # print(prediction)
 
-    return prediction
+    return "hi"
 
 
 def format_ner(ner_prediction: list, print_final_format: bool = False):
