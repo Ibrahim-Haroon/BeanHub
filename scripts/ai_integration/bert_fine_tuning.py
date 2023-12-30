@@ -84,7 +84,7 @@ def fine_tune_bert(model_save_path: str = None) -> bool:
     if model_save_path:
         model.save_model(model_save_path, model=model.model)
     else:
-        save_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../..", "other/genai_models")
+        save_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../..", "other/genai_models/")
         model.save_model(save_path, model=model.model)
 
 
