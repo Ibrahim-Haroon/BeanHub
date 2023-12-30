@@ -7,8 +7,13 @@ from scripts.server.similarity_search import similarity_search
 
 @pytest.fixture
 def mock_components(mocker):
+    ner_model_mock = mocker.patch('scripts.ai_integration.nlp_bert.NERModel')
+    mock_instance = ner_model_mock.return_value
+
+    mock_instance.predict.return_value = ([{"entity": "example", "score": 0.99}], None)
+
     return {
-        # 'nlp_bert': mocker.patch('transformers.AutoModel.predict.return_value'),
+        'ner_model_mock': ner_model_mock,
         'openai_embedding_api': mocker.patch('scripts.server.similarity_search.openai_embedding_api'),
         'connection_string': mocker.patch('scripts.server.connection_string.connection_string'),
         'connect': mocker.patch('scripts.server.similarity_search.psycopg2.connect'),
