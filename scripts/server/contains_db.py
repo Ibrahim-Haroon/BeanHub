@@ -7,7 +7,7 @@ from scripts.ai_integration.nlp_bert import ner_transformer
 import numpy as np
 
 
-def similarity_search(order: str, top_k: int = 3, key: str = None, aws_csv_file: StringIO = None, database_csv_file: StringIO = None) -> object:
+def contains(order: str, top_k: int = 3, key: str = None, aws_csv_file: StringIO = None, database_csv_file: StringIO = None) -> object:
     """
 
     @rtype: list[list[float]] + boolean
@@ -22,17 +22,23 @@ def similarity_search(order: str, top_k: int = 3, key: str = None, aws_csv_file:
         return None, False
 
     formatted_thing = ner_transformer(order)
+
     embedding = openai_embedding_api(str(formatted_thing), key)
+
 
     get_secret(aws_csv_file if not None else None)
     db_connection = psycopg2.connect(connection_string(database_csv_file if not None else None))
     db_connection.set_session(autocommit=True)
 
     cur = db_connection.cursor()
-    cur.execute(f""" SELECTED id, item_name, item_quantity, common_allergin, num_calories, price, embeddings
-                    FROM products
-                    ORDER BY embeddings <-> %s limit {top_k};""",
-                (np.array(embedding),))
+    sql_query = """SELECT id, item_name, item_quantity, common_allergin, num_calories, price, embeddings
+                   FROM products
+                   WHERE item_quantity >= %s
+                   ORDER BY embeddings <-> %s LIMIT 1;"""
+
+    # Execute the query with both quantity and embedding as parameters
+
+    cur.execute(sql_query, ("FILL_item_quantity", np.array(embedding)))
     results = cur.fetchall()
 
     cur.close()
@@ -46,7 +52,7 @@ def main() -> int:
     with open(key_path) as api_key:
         key = api_key.readline().strip()
 
-    similarity_search(order="dummy", key=key)
+    contains(order="dummy", key=key)
 
     return 0
 

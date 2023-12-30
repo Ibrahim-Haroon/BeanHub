@@ -8,7 +8,7 @@ from scripts.server.similarity_search import similarity_search
 @pytest.fixture
 def mock_components(mocker):
     return {
-        'nlp_bert': mocker.patch('scripts.ai_integration.nlp_bert'),
+        # 'nlp_bert': mocker.patch('transformers.AutoModel.predict.return_value'),
         'openai_embedding_api': mocker.patch('scripts.server.similarity_search.openai_embedding_api'),
         'connection_string': mocker.patch('scripts.server.connection_string.connection_string'),
         'connect': mocker.patch('scripts.server.similarity_search.psycopg2.connect'),
@@ -40,8 +40,10 @@ def test_similarity_search_returns_true_when_given_valid_params(mocker, mock_bot
         ["secret_name", "region_name", "aws_access_key_id", "aws_secret_access_key"],
         ["name", "us-east-1", "aws_access_key_id", "aws_secret_access_key"]]
 
+    aws = as_csv_file(aws_info)
+    db = as_csv_file(database_info)
     # Act
-    _, res = similarity_search(data, key=key, aws_csv_file=as_csv_file(aws_info), database_csv_file=as_csv_file(database_info))
+    _, res = similarity_search(data, key=key, aws_csv_file=aws, database_csv_file=db)
 
     # Assert
     assert res is True, f"expected search to be successful but {res}"
