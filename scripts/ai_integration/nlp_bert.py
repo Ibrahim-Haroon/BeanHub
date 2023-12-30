@@ -6,7 +6,7 @@ from word2number import w2n
 def ner_transformer(input_string: str = None, print_prediction: bool = False) -> list:
     transformer_file_path = path.join(path.dirname(path.realpath(__file__)), "../..", "other/genai_models/")
 
-    model = NERModel('bert', transformer_file_path)
+    model = NERModel('bert', transformer_file_path, use_cuda=False)
 
     prediction, _ = model.predict([input_string])
 
