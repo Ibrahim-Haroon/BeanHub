@@ -23,7 +23,7 @@ def record_until_silence(source=None) -> object:
 
             while True:
                 try:
-                    audio_chunk = recognizer.listen(audio_source, timeout=2)
+                    audio_chunk = recognizer.listen(audio_source, timeout=1)
                     audio_data.append(audio_chunk.frame_data)
 
                     # Try to convert speech to text
