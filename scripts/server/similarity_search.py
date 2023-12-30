@@ -22,9 +22,7 @@ def similarity_search(order: str, top_k: int = 3, key: str = None, aws_csv_file:
         return None, False
 
     formatted_thing = ner_transformer(order)
-
     embedding = openai_embedding_api(str(formatted_thing), key)
-
 
     get_secret(aws_csv_file if not None else None)
     db_connection = psycopg2.connect(connection_string(database_csv_file if not None else None))

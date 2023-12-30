@@ -64,3 +64,4 @@ def format_ner(ner_prediction: list, print_final_format: bool = False):
 
 if __name__ == "__main__":
     ner_transformer()
+    
