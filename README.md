@@ -4,7 +4,7 @@
 
 # BeanHub
 
-## [Get us running on your machhine!](https://github.com/Ibrahim-Haroon/BeanHub/wiki/Getting-Started)
+## [Get us running on your machine!](https://github.com/Ibrahim-Haroon/BeanHub/wiki/Getting-Started)
 
 ## Architecture
 ![architecture.drawio.png](other/images/architecture.drawio.png)
