@@ -2,7 +2,7 @@ import pytest
 from mock import patch, MagicMock
 from io import StringIO
 import csv
-from scripts.server.similarity_search import similarity_search
+from scripts.server.vector_db.similarity_search import similarity_search
 
 
 @pytest.fixture
@@ -14,9 +14,9 @@ def mock_components(mocker):
 
     return {
         'ner_model_mock': ner_model_mock,
-        'openai_embedding_api': mocker.patch('scripts.server.similarity_search.openai_embedding_api'),
-        'connection_string': mocker.patch('scripts.server.connection_string.connection_string'),
-        'connect': mocker.patch('scripts.server.similarity_search.psycopg2.connect'),
+        'openai_embedding_api': mocker.patch('scripts.server.vector_db.similarity_search.openai_embedding_api'),
+        'connection_string': mocker.patch('scripts.server.vector_db.connection_string.connection_string'),
+        'connect': mocker.patch('scripts.server.vector_db.similarity_search.psycopg2.connect'),
     }
 
 

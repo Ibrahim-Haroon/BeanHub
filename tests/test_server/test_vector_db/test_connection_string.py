@@ -1,6 +1,6 @@
 import pytest
 from mock import mock_open, patch
-from scripts.server.connection_string import connection_string
+from scripts.server.vector_db.connection_string import connection_string
 import pandas as pd
 from os import path
 from io import StringIO

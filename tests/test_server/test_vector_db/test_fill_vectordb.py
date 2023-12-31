@@ -1,6 +1,6 @@
 import pytest
 from mock import patch, MagicMock
-from scripts.server.fill_vectordb import fill_database
+from scripts.server.vector_db.fill_vectordb import fill_database
 from io import StringIO
 import csv
 
@@ -8,10 +8,10 @@ import csv
 @pytest.fixture
 def mock_components(mocker):
     return {
-        'openai_embedding_api': mocker.patch('scripts.server.fill_vectordb.openai_embedding_api'),
-        'connection_string': mocker.patch('scripts.server.connection_string.connection_string'),
+        'openai_embedding_api': mocker.patch('scripts.server.vector_db.fill_vectordb.openai_embedding_api'),
+        'connection_string': mocker.patch('scripts.server.vector_db.connection_string.connection_string'),
         'register_vector': mocker.patch('pgvector.psycopg2.register_vector'),
-        'connect': mocker.patch('scripts.server.fill_vectordb.psycopg2.connect'),
+        'connect': mocker.patch('scripts.server.vector_db.fill_vectordb.psycopg2.connect'),
         'input': mocker.patch('builtins.input'),
     }
 

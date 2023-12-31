@@ -1,8 +1,8 @@
 import psycopg2
 from pgvector.psycopg2 import register_vector
 from scripts.ai_integration.openai_embeddings_api import *
-from scripts.server.aws_secret import get_secret
-from scripts.server.connection_string import connection_string
+from scripts.server.vector_db.aws_secret import get_secret
+from scripts.server.vector_db.connection_string import connection_string
 from other.red import inputRED
 from io import StringIO
 
