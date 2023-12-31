@@ -4,6 +4,13 @@ from word2number import w2n
 
 
 def ner_transformer(input_string: str = None, print_prediction: bool = False) -> list:
+    """
+
+    @rtype: list of dictionaries
+    @param input_string: customer request ex. "I want a black coffee"
+    @param print_prediction: boolean flag to print predictions
+    @return: predictions generated from fine-tune transformer
+    """
     if not input_string or not isinstance(input_string, str):
         return []
 
