@@ -1,8 +1,8 @@
 import psycopg2
 from io import StringIO
-from scripts.server.aws_secret import get_secret
+from scripts.server.vector_db.aws_secret import get_secret
 from scripts.ai_integration.openai_embeddings_api import *
-from scripts.server.connection_string import connection_string
+from scripts.server.vector_db.connection_string import connection_string
 
 
 def add_item(item: dict, key: str = None, aws_csv_file: StringIO = None, database_csv_file: StringIO = None) -> bool:

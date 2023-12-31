@@ -1,7 +1,7 @@
 import pytest
 from mock import mock_open, mock, patch, MagicMock
 from botocore.exceptions import ClientError
-from scripts.server.aws_secret import get_secret
+from scripts.server.vector_db.aws_secret import get_secret
 import pandas as pd
 from os import path
 

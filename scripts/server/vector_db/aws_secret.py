@@ -3,7 +3,6 @@ import pandas as pd
 from os import path
 from botocore.exceptions import ClientError
 from io import StringIO
-import sys
 
 
 def get_secret(csv_file: StringIO = None) -> dict:

@@ -9,7 +9,7 @@ def openai_embedding_api(text: str, api_key: str = None) -> []:
     @rtype: list[list[float]], embeddings object
     @param text: str = contains item name and price
     @param api_key: auth method for OpenAI
-    @return: vector menu item to insert into vector_db
+    @return: vector menu item to insert into test_vector_db
     """
 
     embeddings = OpenAIEmbeddings(api_key=api_key)
