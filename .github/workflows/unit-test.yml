@@ -11,27 +11,39 @@ jobs:
       run:
         working-directory: ./scripts/client
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
         with:
-          node-version: '18'
-      - run: npm install --save-dev jest@latest @testing-library/react@latest
-      - run: npm ci
-      - run: npm run test
+          node-version: '18'  # Adjust the Node.js version as needed
+
+      - name: Install dependencies
+        run: |
+          npm install --save-dev jest@27 @testing-library/react@5
+          npm ci
+
+      - name: Run tests
+        run: npx jest /test_client
 
   backendTesting:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.11.2
+          python-version: '3.11'  # Adjust the Python version as needed
+
       - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y portaudio19-dev flac ffmpeg
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
       - name: Test with pytest
         run: python -m coverage run --branch --source=scripts -m pytest ./tests/
