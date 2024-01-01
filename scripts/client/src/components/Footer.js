@@ -6,7 +6,7 @@ import beanhubLogo from './images/BeanHubTextLogo.png';
 
 function Footer() {
   return (
-    <div className='footer-container'>
+    <div className='footer-container' data-testid="footer">
       <section className='footer-subscription'>
         <p className='footer-subscription-heading'>
           Join the Adventure newsletter to receive our best vacation deals
