@@ -29,7 +29,8 @@ BeanHub
 |       |—— bean_logo.png
 |       |—— coffeebeanhub_logo.png
 |       |—— mock_menu.png
-|       └── timeline.drawio.png
+|       |—— timeline.drawio.png
+|       └── updated_architecture.drawio.png
 |   |—— codebase_structure.txt
 |   └── red.py
 |
