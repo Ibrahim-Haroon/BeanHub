@@ -2,11 +2,7 @@ name: build
 
 on:
   push:
-    paths:
-      - '**.py'
   pull_request:
-    paths:
-      - '**.py'
 
 jobs:
   build:
@@ -31,6 +27,7 @@ jobs:
         cd scripts/client
         npx jest test_client
     - uses: actions/checkout@v3
+    
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
