@@ -5,38 +5,32 @@ on:
   pull_request:
 
 jobs:
-  build:
+  frontendTesting:
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: ./scripts/client
     steps:
-    
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: npm ci
+      - run: npm run test
 
-    - name: Use Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: '14'
-
-    - name: Install dependencies
-      run: |
-        cd scripts/client
-        npm ci
-
-    - name: Run Jest tests
-      run: |
-        cd scripts/client
-        npx jest test_client
-    - uses: actions/checkout@v3
-    
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.11.2
-    - name: Install dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y portaudio19-dev flac ffmpeg
-        python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Test with pytest
-      run: python -m coverage run --branch --source=scripts -m pytest ./tests/
+  backendTesting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.11.2
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y portaudio19-dev flac ffmpeg
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Test with pytest
+        run: python -m coverage run --branch --source=scripts -m pytest ./tests/
