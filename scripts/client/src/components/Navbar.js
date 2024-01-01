@@ -27,7 +27,7 @@ function Navbar() {
 
   return (
     <>
-      <nav className='navbar'>
+      <nav className='navbar' data-testid="navbar">
         <div className='navbar-container'>
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
             <img src={logoImage} alt='BeanHub Logo' className='logo-image' />

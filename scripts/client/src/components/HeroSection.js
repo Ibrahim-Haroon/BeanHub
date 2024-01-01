@@ -5,7 +5,7 @@ import './HeroSection.css';
 
 function HeroSection() {
   return (
-    <div className='hero-container'>
+    <div className='hero-container' data-testid="hero-section">
       <h1>Coffee Optimized</h1>
       <p>AI Driven Customer Service...</p>
       <div className='hero-btns'>
