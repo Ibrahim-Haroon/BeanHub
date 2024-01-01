@@ -1,4 +1,5 @@
-![build](https://github.com/Ibrahim-Haroon/BeanHub/actions/workflows/unit-test.yml/badge.svg)
+![backend](https://github.com/Ibrahim-Haroon/BeanHub-backend/actions/workflows/unit-test.yml/badge.svg)
+![frontend](https://github.com/Ibrahim-Haroon/BeanHub-frontend/actions/workflows/unit-test.yml/badge.svg)
 <img src="other/images/coffeebeanhub_logo.png" alt="BeanHub" width="50" height="50">
 
 
