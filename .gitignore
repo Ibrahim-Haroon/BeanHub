@@ -1,2 +1,5 @@
 .DS_Store
 .idea
+other/aws-info.csv
+other/database-info.csv
+other/api_key.txt
