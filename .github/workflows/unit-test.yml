@@ -21,7 +21,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install --save-dev jest@27 @testing-library/react@5
+          npm install --save-dev jest@latest @testing-library/react@latest
           npm ci
 
       - name: Run tests
