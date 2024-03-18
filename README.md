@@ -14,4 +14,4 @@
 ## [Learn More](https://github.com/Ibrahim-Haroon/BeanHub/wiki)
 
 ## Timeline
-![timeline.png](other/images/timeline.drawio.png)
+![timeline.png](other/images/deck_timeline.drawio.png)
